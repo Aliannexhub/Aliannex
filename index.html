@@ -10,55 +10,39 @@
   <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Títulos con look deportivo/moderno (Rajdhani) con performance seguro -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
-
   <style>
-    /* Base */
+    /* ==========================
+       Fuentes locales (en /fonts)
+       ========================== */
+    @font-face { font-family: 'Bebas Neue'; src: url('fonts/BebasNeue-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Lato'; src: url('fonts/Lato-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Lato'; src: url('fonts/Lato-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
+
+    /* Base y tipografías */
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    body { font-family: 'Lato', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: .02em; }
+
+    /* Utilidades visuales */
     .shadow-soft { box-shadow: 0 10px 20px rgba(0,0,0,.4), 0 6px 6px rgba(0,0,0,.5); }
     .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
     header.sticky.top-0 { -webkit-backdrop-filter: blur(8px); background-color: rgba(17,17,17,0.8); }
 
-    /* Títulos con look deportivo/moderno */
-    h1, h2, h3 {
-      font-family: 'Rajdhani', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      letter-spacing: .02em;
-    }
-
     /* Texto metalizado animado */
-    .brand-gradient {
-      background: linear-gradient(110deg, #ffffff 0%, #ffe8d6 18%, #ffb36b 28%, #ff8a00 38%, #ffb36b 48%, #ffe8d6 60%, #ffffff 80%);
-      background-size: 220% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: metallic-sheen 6s linear infinite;
-    }
-    @keyframes metallic-sheen {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .brand-gradient { animation: none; }
-    }
+    .brand-gradient { background: linear-gradient(110deg, #ffffff 0%, #ffe8d6 18%, #ffb36b 28%, #ff8a00 38%, #ffb36b 48%, #ffe8d6 60%, #ffffff 80%); background-size: 220% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: metallic-sheen 6s linear infinite; }
+    @keyframes metallic-sheen { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    @media (prefers-reduced-motion: reduce) { .brand-gradient { animation: none; } }
 
     /* Hint visual: zoom + halo */
-    .pulse-zoom { animation: nudgeZoom .5s ease; }
-    .pulse-halo { animation: halo .8s ease; }
-    @keyframes nudgeZoom { 0% { transform: scale(1); } 50% { transform: scale(1.06); } 100% { transform: scale(1); } }
-    @keyframes halo { 0% { box-shadow: 0 0 0 0 rgba(255,138,0,0); } 50% { box-shadow: 0 0 0 6px rgba(255,138,0,0.22), 0 0 28px rgba(255,138,0,0.35); } 100% { box-shadow: 0 0 0 0 rgba(255,138,0,0); } }
+    .pulse-zoom { animation: nudgeZoom .5s ease; } @keyframes nudgeZoom { 0% { transform: scale(1); } 50% { transform: scale(1.06); } 100% { transform: scale(1); } }
+    .pulse-halo { animation: halo .8s ease; } @keyframes halo { 0% { box-shadow: 0 0 0 0 rgba(255,138,0,0); } 50% { box-shadow: 0 0 0 6px rgba(255,138,0,0.22), 0 0 28px rgba(255,138,0,0.35); } 100% { box-shadow: 0 0 0 0 rgba(255,138,0,0); } }
 
-    /* FAQ: slide height sin parpadeos (JS gestiona max-height) */
-    details .faq-content { max-height: 0; overflow: hidden; transition: max-height .32s ease; will-change: max-height; }
-    details[open] .faq-content { /* se gestiona por JS */ }
+    /* FAQ slide sin parpadeos (JS controlará max-height) */
+    #faq details .faq-content { max-height: 0; overflow: hidden; transition: max-height .32s ease; will-change: max-height; }
     summary::-webkit-details-marker { display: none; }
     summary:focus-visible { outline: 2px solid #fb923c; outline-offset: 4px; border-radius: .5rem; }
 
-    /* Medios siempre responsivos */
+    /* Medios responsivos */
     img, iframe, video { max-width: 100%; height: auto; }
   </style>
 </head>
@@ -68,9 +52,7 @@
   <!-- NAV -->
   <header class="sticky top-0 z-40 bg-neutral-900/80 backdrop-blur border-b border-neutral-800">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3">
-        <span class="text-xl font-extrabold brand-gradient select-none">ALIANNEX</span>
-      </a>
+      <a href="#" class="flex items-center gap-3"><span class="text-xl font-extrabold brand-gradient select-none">ALIANNEX</span></a>
       <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
         <a href="#servicios" class="hover:text-orange-400">Servicios</a>
         <a href="#nosotros" class="hover:text-orange-400">¿Qué somos?</a>
@@ -80,14 +62,12 @@
       </nav>
       <div class="flex items-center gap-2">
         <a href="#postula" class="hidden sm:inline-flex items-center justify-center rounded-xl bg-orange-600 text-white px-4 py-2 text-sm font-semibold shadow-soft hover:bg-orange-700">Postular</a>
-        <!-- Botón hamburguesa -->
         <button id="menu-toggle" aria-controls="mobile-menu" aria-expanded="false" class="md:hidden inline-flex items-center justify-center rounded-xl border border-neutral-700 p-2 text-slate-200 hover:border-neutral-500" title="Abrir menú">
           <span class="sr-only">Abrir menú</span>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
       </div>
     </div>
-    <!-- Menú móvil -->
     <div id="mobile-menu" class="md:hidden hidden border-t border-neutral-800 bg-neutral-950/95">
       <div class="max-w-6xl mx-auto px-4 py-3 grid gap-3 text-sm">
         <a class="py-2 hover:text-orange-400" href="#servicios">Servicios</a>
@@ -106,9 +86,7 @@
     <div class="max-w-6xl mx-auto px-4 py-12 md:py-20 grid md:grid-cols-2 gap-8 md:gap-10 items-center">
       <div>
         <p class="text-sm uppercase tracking-wider text-orange-400 font-semibold">Reclutamiento ágil y confiable</p>
-        <h1 class="mt-3 text-4xl md:text-5xl font-extrabold leading-tight">
-          <span class="brand-gradient">ALIANNEX</span>: talento para <span class="text-orange-400">gimnasios</span> y <span class="text-orange-400">colegios</span>
-        </h1>
+        <h1 class="mt-3 text-4xl md:text-5xl font-extrabold leading-tight"><span class="brand-gradient">ALIANNEX</span>: talento para <span class="text-orange-400">gimnasios</span> y <span class="text-orange-400">colegios</span></h1>
         <p class="mt-4 text-base md:text-lg text-slate-300">Conectamos instituciones con personas responsables y puntuales. Si buscas trabajo o necesitas cubrir turnos, postula o contáctanos.</p>
         <div class="mt-6 flex flex-wrap gap-3">
           <a href="#postula" class="rounded-xl bg-orange-600 text-white px-5 py-3 font-semibold shadow-soft hover:bg-orange-700">Quiero postular</a>
@@ -120,18 +98,9 @@
           <h2 class="text-lg md:text-xl font-bold brand-gradient">Plataforma de Staffing</h2>
           <p class="mt-3 text-slate-300 text-sm">Una base organizada de postulantes listos para cubrir necesidades de gimnasios, colegios y organizaciones.</p>
           <div class="mt-4 grid grid-cols-3 gap-3 text-center">
-            <div class="p-4 rounded-xl bg-neutral-800">
-              <p class="text-2xl font-extrabold">72h</p>
-              <p class="text-xs text-slate-400">Tiempo de respuesta</p>
-            </div>
-            <div class="p-4 rounded-xl bg-neutral-800">
-              <p class="text-2xl font-extrabold">+50</p>
-              <p class="text-xs text-slate-400">Talentos en fila</p>
-            </div>
-            <div class="p-4 rounded-xl bg-neutral-800">
-              <p class="text-2xl font-extrabold">98%</p>
-              <p class="text-xs text-slate-400">Asistencia validada*</p>
-            </div>
+            <div class="p-4 rounded-xl bg-neutral-800"><p class="text-2xl font-extrabold">72h</p><p class="text-xs text-slate-400">Tiempo de respuesta</p></div>
+            <div class="p-4 rounded-xl bg-neutral-800"><p class="text-2xl font-extrabold">+50</p><p class="text-xs text-slate-400">Talentos en fila</p></div>
+            <div class="p-4 rounded-xl bg-neutral-800"><p class="text-2xl font-extrabold">98%</p><p class="text-xs text-slate-400">Asistencia validada*</p></div>
           </div>
           <p class="mt-2 text-[11px] text-slate-500">* Métrica de ejemplo. Se actualizará con datos reales.</p>
         </div>
@@ -145,18 +114,9 @@
       <h2 class="text-3xl md:text-4xl font-extrabold brand-gradient">¿Qué ofrecemos?</h2>
       <p class="mt-3 text-slate-300 max-w-2xl">Soluciones flexibles para cubrir turnos, temporadas altas o vacantes permanentes. Enfoque en roles operativos, deportivos y de apoyo.</p>
       <div class="mt-8 md:mt-10 grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft">
-          <h3 class="font-bold text-lg text-white">Gimnasios</h3>
-          <p class="mt-2 text-slate-400 text-sm">Recepción, limpieza, asistentes de sala, monitores, apoyo en eventos y reemplazos.</p>
-        </div>
-        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft">
-          <h3 class="font-bold text-lg text-white">Colegios</h3>
-          <p class="mt-2 text-slate-400 text-sm">Asistentes deportivos, apoyo en educación física, auxiliares de eventos y logística.</p>
-        </div>
-        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft">
-          <h3 class="font-bold text-lg text-white">Contratación ágil</h3>
-          <p class="mt-2 text-slate-400 text-sm">Pre-filtro, entrevistas breves, verificación básica y shortlist en 24–72h.</p>
-        </div>
+        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft"><h3 class="font-bold text-lg text-white">Gimnasios</h3><p class="mt-2 text-slate-400 text-sm">Recepción, limpieza, asistentes de sala, monitores, apoyo en eventos y reemplazos.</p></div>
+        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft"><h3 class="font-bold text-lg text-white">Colegios</h3><p class="mt-2 text-slate-400 text-sm">Asistentes deportivos, apoyo en educación física, auxiliares de eventos y logística.</p></div>
+        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft"><h3 class="font-bold text-lg text-white">Contratación ágil</h3><p class="mt-2 text-slate-400 text-sm">Pre-filtro, entrevistas breves, verificación básica y shortlist en 24–72h.</p></div>
       </div>
     </div>
   </section>
@@ -165,19 +125,13 @@
   <section id="nosotros" class="py-12 md:py-20 border-t border-neutral-800 bg-neutral-950">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-extrabold brand-gradient">¿Qué somos? ¿Qué hacemos?</h2>
-      <p class="mt-3 text-slate-300 max-w-3xl">
-        En <strong>ALIANNEX</strong> prestamos servicios de <strong>soluciones en gestión de personal</strong>,
-        conectando a tu empresa con el talento que realmente necesita. Nos encargamos del reclutamiento y selección de los
-        candidatos adecuados, mientras creamos un canal de comunicación más efectivo entre trabajadores y organización.
-        Así evitamos problemas que afectan la productividad y fortalecemos un entorno laboral fluido, confiable y orientado al crecimiento.
-      </p>
-
+      <p class="mt-3 text-slate-300 max-w-3xl">En <strong>ALIANNEX</strong> prestamos servicios de <strong>soluciones en gestión de personal</strong>, conectando a tu empresa con el talento que realmente necesita. Nos encargamos del reclutamiento y selección de los candidatos adecuados, mientras creamos un canal de comunicación más efectivo entre trabajadores y organización. Así evitamos problemas que afectan la productividad y fortalecemos un entorno laboral fluido, confiable y orientado al crecimiento.</p>
       <div class="mt-6 p-6 rounded-xl border border-neutral-800 bg-neutral-900">
         <h3 class="font-semibold text-white">Nuestro servicio en pocas palabras</h3>
         <ul class="mt-3 list-disc list-inside text-slate-400">
           <li><strong>Matching eficiente:</strong> cuando una institución solicita personal, buscamos en nuestra base y presentamos un <em>shortlist</em> de candidatos.</li>
           <li><strong>Reclutamiento y selección:</strong> aplicamos pre-filtros, validamos documentación y realizamos verificaciones básicas.</li>
-          <li><strong>Continuidad asegurada:</strong> cobertura prioritaria ante ausencias o aumentos de demanda.</li>
+          <li><strong>Continuidad asegurada:</strong> cobertura prioritaria ante ausencias o picos de demanda.</li>
         </ul>
       </div>
     </div>
@@ -187,26 +141,11 @@
   <section id="por-que" class="py-12 md:py-20 border-t border-neutral-800 bg-neutral-950">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-extrabold brand-gradient">¿Por qué elegirnos?</h2>
-      <p class="mt-3 text-slate-300 max-w-3xl">
-        En <strong>ALIANNEX</strong> ofrecemos algo más que rapidez: construimos relaciones de confianza y crecimiento mutuo entre empresas y personas.
-        Nuestro enfoque prioriza el desempeño, la continuidad y el desarrollo, para equipos estables y comprometidos.
-      </p>
-
+      <p class="mt-3 text-slate-300 max-w-3xl">En <strong>ALIANNEX</strong> ofrecemos algo más que rapidez: construimos relaciones de confianza y crecimiento mutuo entre empresas y personas. Nuestro enfoque prioriza el desempeño, la continuidad y el desarrollo, para equipos estables y comprometidos.</p>
       <div class="mt-8 grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft transition-transform duration-200 hover:-translate-y-1">
-          <h3 class="font-semibold text-white">Talento comprometido</h3>
-          <p class="mt-2 text-slate-400 text-sm">Reclutamos personas responsables y puntuales, con foco en desempeño y buena experiencia para el usuario final.</p>
-        </div>
-
-        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft transition-transform duration-200 hover:-translate-y-1">
-          <h3 class="font-semibold text-white">Continuidad para tu operación</h3>
-          <p class="mt-2 text-slate-400 text-sm">Menor rotación y cobertura oportuna de ausencias o picos de demanda, para que tu servicio no se detenga.</p>
-        </div>
-
-        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft transition-transform duration-200 hover:-translate-y-1">
-          <h3 class="font-semibold text-white">Progreso y reconocimiento</h3>
-          <p class="mt-2 text-slate-400 text-sm">Reconocemos el buen trabajo con oportunidades de avanzar y acceder a mejores condiciones con el tiempo.</p>
-        </div>
+        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft transition-transform duration-200 hover:-translate-y-1"><h3 class="font-semibold text-white">Talento comprometido</h3><p class="mt-2 text-slate-400 text-sm">Reclutamos personas responsables y puntuales, con foco en desempeño y buena experiencia para el usuario final.</p></div>
+        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft transition-transform duration-200 hover:-translate-y-1"><h3 class="font-semibold text-white">Continuidad para tu operación</h3><p class="mt-2 text-slate-400 text-sm">Menor rotación y cobertura oportuna de ausencias o picos de demanda, para que tu servicio no se detenga.</p></div>
+        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft transition-transform duration-200 hover:-translate-y-1"><h3 class="font-semibold text-white">Progreso y reconocimiento</h3><p class="mt-2 text-slate-400 text-sm">Reconocemos el buen trabajo con oportunidades de avanzar y acceder a mejores condiciones con el tiempo.</p></div>
       </div>
     </div>
   </section>
@@ -216,18 +155,9 @@
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-extrabold brand-gradient">Cómo funciona</h2>
       <div class="mt-8 md:mt-10 grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft">
-          <div class="text-sm font-semibold text-orange-400">1. Postula</div>
-          <p class="mt-2 text-slate-400">Completa el formulario con tus datos, disponibilidad y experiencia.</p>
-        </div>
-        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft">
-          <div class="text-sm font-semibold text-orange-400">2. Pre-filtro</div>
-          <p class="mt-2 text-slate-400">Validación rápida por WhatsApp/llamada y verificación básica.</p>
-        </div>
-        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft">
-          <div class="text-sm font-semibold text-orange-400">3. Asignación</div>
-          <p class="mt-2 text-slate-400">Te contactamos para oportunidades según tu perfil y ubicación.</p>
-        </div>
+        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft"><div class="text-sm font-semibold text-orange-400">1. Postula</div><p class="mt-2 text-slate-400">Completa el formulario con tus datos, disponibilidad y experiencia.</p></div>
+        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft"><div class="text-sm font-semibold text-orange-400">2. Pre-filtro</div><p class="mt-2 text-slate-400">Validación rápida por WhatsApp/llamada y verificación básica.</p></div>
+        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft"><div class="text-sm font-semibold text-orange-400">3. Asignación</div><p class="mt-2 text-slate-400">Te contactamos para oportunidades según tu perfil y ubicación.</p></div>
       </div>
     </div>
   </section>
@@ -238,9 +168,7 @@
       <div class="rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft p-6 md:p-8">
         <h2 class="text-2xl md:text-3xl font-extrabold brand-gradient">Postula acá</h2>
         <p class="mt-2 text-slate-400">Completa el formulario y listo. Te contactaremos por WhatsApp o correo si haces match con alguna vacante.</p>
-        <div class="mt-6 text-center">
-          <a id="form-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdPKU-3_d6F64pB09lvfA3EvY3mkxx5Zny3N9RE376nHIY3zw/viewform?usp=dialog" target="_blank" rel="noopener" class="inline-block rounded-xl bg-orange-600 text-white px-6 py-3 font-semibold shadow-soft hover:bg-orange-700">Ir al formulario de postulación</a>
-        </div>
+        <div class="mt-6 text-center"><a id="form-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdPKU-3_d6F64pB09lvfA3EvY3mkxx5Zny3N9RE376nHIY3zw/viewform?usp=dialog" target="_blank" rel="noopener" class="inline-block rounded-xl bg-orange-600 text-white px-6 py-3 font-semibold shadow-soft hover:bg-orange-700">Ir al formulario de postulación</a></div>
       </div>
     </div>
   </section>
@@ -251,34 +179,18 @@
       <h2 class="text-3xl md:text-4xl font-extrabold brand-gradient">Preguntas frecuentes</h2>
       <div class="mt-8 space-y-4">
         <details class="group rounded-xl border border-neutral-800 bg-neutral-900 p-5">
-          <summary class="flex cursor-pointer list-none items-center justify-between font-semibold">
-            <span>¿Tiene costo para postular?</span>
-            <span class="text-slate-400 transition-transform duration-200 group-open:rotate-180">▼</span>
-          </summary>
-          <div class="faq-content">
-            <p class="mt-2 text-slate-400">No. Postular es 100% gratis. Solo pedimos datos básicos y disponibilidad.</p>
-          </div>
+          <summary class="flex cursor-pointer list-none items-center justify-between font-semibold"><span>¿Tiene costo para postular?</span><span class="text-slate-400 transition-transform duration-200 group-open:rotate-180">▼</span></summary>
+          <div class="faq-content"><p class="mt-2 text-slate-400">No. Postular es 100% gratis. Solo pedimos datos básicos y disponibilidad.</p></div>
         </details>
         <details class="group rounded-xl border border-neutral-800 bg-neutral-900 p-5">
-          <summary class="flex cursor-pointer list-none items-center justify-between font-semibold">
-            <span>¿Cómo se gestionan los pagos?</span>
-            <span class="text-slate-400 transition-transform duration-200 group-open:rotate-180">▼</span>
-          </summary>
-          <div class="faq-content">
-            <p class="mt-2 text-slate-400">Depende del servicio y la institución. Informamos claramente antes de cada asignación.</p>
-          </div>
+          <summary class="flex cursor-pointer list-none items-center justify-between font-semibold"><span>¿Cómo se gestionan los pagos?</span><span class="text-slate-400 transition-transform duration-200 group-open:rotate-180">▼</span></summary>
+          <div class="faq-content"><p class="mt-2 text-slate-400">Depende del servicio y la institución. Informamos claramente antes de cada asignación.</p></div>
         </details>
         <details class="group rounded-xl border border-neutral-800 bg-neutral-900 p-5">
-          <summary class="flex cursor-pointer list-none items-center justify-between font-semibold">
-            <span>¿Qué documentos piden?</span>
-            <span class="text-slate-400 transition-transform duration-200 group-open:rotate-180">▼</span>
-          </summary>
-          <div class="faq-content">
-            <p class="mt-2 text-slate-400">Cédula vigente, certificado de antecedentes simples y, si aplica, certificados deportivos o de primeros auxilios. Para extranjeros, visa o permiso de trabajo vigente.</p>
-          </div>
+          <summary class="flex cursor-pointer list-none items-center justify-between font-semibold"><span>¿Qué documentos piden?</span><span class="text-slate-400 transition-transform duration-200 group-open:rotate-180">▼</span></summary>
+          <div class="faq-content"><p class="mt-2 text-slate-400">Cédula vigente, certificado de antecedentes simples y, si aplica, certificados deportivos o de primeros auxilios. Para extranjeros, visa o permiso de trabajo vigente.</p></div>
         </details>
       </div>
-
       <div class="mt-10 text-xs text-slate-500 border-t pt-6">
         <h3 class="font-bold text-sm text-slate-300">Aviso de privacidad</h3>
         <p class="mt-2 text-slate-400">Los datos personales entregados serán recolectados por <strong>ALIANNEX</strong> y utilizados únicamente con fines de postulación y contacto en procesos de selección para gimnasios y colegios. La información será tratada confidencialmente conforme a la Ley N°19.628, no será compartida con terceros sin su autorización y será almacenada de forma segura. Puede solicitar rectificación o eliminación escribiendo a <a href="mailto:contacto.aliannex@gmail.com" class="underline text-orange-400">contacto.aliannex@gmail.com</a>.</p>
@@ -292,107 +204,45 @@
       <div>
         <h3 class="font-extrabold text-xl brand-gradient">Hablemos</h3>
         <p class="mt-2 text-slate-400 text-sm">¿Institución interesada? Escríbenos y coordinamos una llamada breve.</p>
-        <div class="mt-3 text-sm">
-          <a id="email-cta" href="mailto:contacto.aliannex@gmail.com" class="inline-block rounded-md text-orange-400 font-semibold underline px-1">contacto.aliannex@gmail.com</a> ·
-          <a id="wa-cta" href="https://wa.me/56986985919" target="_blank" rel="noopener" class="inline-block rounded-md text-orange-400 font-semibold underline px-1">WhatsApp</a>
-        </div>
+        <div class="mt-3 text-sm"><a id="email-cta" href="mailto:contacto.aliannex@gmail.com" class="inline-block rounded-md text-orange-400 font-semibold underline px-1">contacto.aliannex@gmail.com</a> · <a id="wa-cta" href="https://wa.me/56986985919" target="_blank" rel="noopener" class="inline-block rounded-md text-orange-400 font-semibold underline px-1">WhatsApp</a></div>
       </div>
-      <div class="text-sm text-slate-500">
-        <p>© <span id="y"></span> ALIANNEX. Todos los derechos reservados.</p>
-        <p class="mt-1">Sitio de demostración. Algunos números son referenciales hasta consolidar datos reales.</p>
-      </div>
+      <div class="text-sm text-slate-500"><p>© <span id="y"></span> ALIANNEX. Todos los derechos reservados.</p><p class="mt-1">Sitio de demostración. Algunos números son referenciales hasta consolidar datos reales.</p></div>
     </div>
   </footer>
 
   <script>
     // Año dinámico y menú móvil
     document.addEventListener('DOMContentLoaded', function () {
-      var y = document.getElementById('y');
-      if (y) y.textContent = new Date().getFullYear();
-
-      var toggle = document.getElementById('menu-toggle');
-      var mobile = document.getElementById('mobile-menu');
+      var y = document.getElementById('y'); if (y) y.textContent = new Date().getFullYear();
+      var toggle = document.getElementById('menu-toggle'); var mobile = document.getElementById('mobile-menu');
       if (toggle && mobile) {
-        toggle.addEventListener('click', function(){
-          var open = mobile.classList.toggle('hidden') === false;
-          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        });
-        mobile.addEventListener('click', function(e){
-          if (e.target.tagName === 'A') {
-            mobile.classList.add('hidden');
-            toggle.setAttribute('aria-expanded', 'false');
-          }
-        });
+        toggle.addEventListener('click', function(){ var open = mobile.classList.toggle('hidden') === false; toggle.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+        mobile.addEventListener('click', function(e){ if (e.target.tagName === 'A') { mobile.classList.add('hidden'); toggle.setAttribute('aria-expanded', 'false'); } });
       }
     });
   </script>
-
   <script>
     // Hint visual al llegar a secciones clave
     (function(){
-      function hint(ids){
-        ids.forEach(function(id){
-          var el = document.getElementById(id);
-          if(!el) return;
-          el.classList.add('pulse-zoom'); el.classList.add('pulse-halo');
-          setTimeout(function(){ el.classList.remove('pulse-zoom'); el.classList.remove('pulse-halo'); }, 700);
-        });
-      }
-      function interceptAnchor(selector, targetSelector, idsToHint){
-        document.querySelectorAll(selector).forEach(function(a){
-          a.addEventListener('click', function(ev){
-            ev.preventDefault();
-            var target = document.querySelector(targetSelector);
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setTimeout(function(){ hint(idsToHint); }, 400);
-            var mobile = document.getElementById('mobile-menu');
-            var toggle = document.getElementById('menu-toggle');
-            if (mobile && !mobile.classList.contains('hidden')) {
-              mobile.classList.add('hidden');
-              if (toggle) toggle.setAttribute('aria-expanded','false');
-            }
-          });
-        });
-      }
+      function hint(ids){ ids.forEach(function(id){ var el = document.getElementById(id); if(!el) return; el.classList.add('pulse-zoom'); el.classList.add('pulse-halo'); setTimeout(function(){ el.classList.remove('pulse-zoom'); el.classList.remove('pulse-halo'); }, 700); }); }
+      function interceptAnchor(selector, targetSelector, idsToHint){ document.querySelectorAll(selector).forEach(function(a){ a.addEventListener('click', function(ev){ ev.preventDefault(); var target = document.querySelector(targetSelector); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); setTimeout(function(){ hint(idsToHint); }, 400); var mobile = document.getElementById('mobile-menu'); var toggle = document.getElementById('menu-toggle'); if (mobile && !mobile.classList.contains('hidden')) { mobile.classList.add('hidden'); if (toggle) toggle.setAttribute('aria-expanded','false'); } }); }); }
       interceptAnchor('a[href="#postula"]', '#postula', ['form-cta']);
       interceptAnchor('a[href="#contacto"]', '#contacto', ['email-cta','wa-cta']);
     })();
   </script>
-
   <script>
-    // FAQ sin parpadeos: animamos solo altura y dejamos 'max-height: none' al final
+    // FAQ: slide sin parpadeos (animación altura)
     (function(){
-      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReduced) return;
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; if (prefersReduced) return;
       document.querySelectorAll('#faq details').forEach(function(det){
-        var content = det.querySelector('.faq-content');
-        if (!content) return;
-        content.style.overflow = 'hidden';
-        content.style.maxHeight = det.open ? content.scrollHeight + 'px' : '0px';
+        var content = det.querySelector('.faq-content'); if (!content) return;
+        content.style.overflow = 'hidden'; content.style.maxHeight = det.open ? content.scrollHeight + 'px' : '0px';
         det.addEventListener('toggle', function(){
           var open = det.open;
-          if (open) {
-            content.style.transition = 'none';
-            content.style.maxHeight = '0px';
-            requestAnimationFrame(function(){
-              content.style.transition = 'max-height 320ms ease';
-              content.style.maxHeight = content.scrollHeight + 'px';
-            });
-          } else {
-            content.style.transition = 'none';
-            content.style.maxHeight = content.scrollHeight + 'px';
-            requestAnimationFrame(function(){
-              content.style.transition = 'max-height 300ms ease';
-              content.style.maxHeight = '0px';
-            });
-          }
+          if (open) { content.style.transition = 'none'; content.style.maxHeight = '0px'; requestAnimationFrame(function(){ content.style.transition = 'max-height 320ms ease'; content.style.maxHeight = content.scrollHeight + 'px'; }); }
+          else { content.style.transition = 'none'; content.style.maxHeight = content.scrollHeight + 'px'; requestAnimationFrame(function(){ content.style.transition = 'max-height 300ms ease'; content.style.maxHeight = '0px'; }); }
         });
-        content.addEventListener('transitionend', function(){
-          if (det.open) {
-            content.style.transition = 'none';
-            content.style.maxHeight = 'none';
-          }
-        });
+        content.addEventListener('transitionend', function(){ if (det.open) { content.style.transition = 'none'; content.style.maxHeight = 'none'; } });
       });
     })();
   </script>
