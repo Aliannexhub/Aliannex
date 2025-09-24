@@ -6,13 +6,45 @@
   <meta name="theme-color" content="#0a0a0a" />
   <title>ALIANNEX — Talento para Gimnasios y Colegios</title>
   <meta name="description" content="ALIANNEX conecta instituciones con personal confiable para roles operativos, deportivos y de apoyo. Postula aquí o deja tus datos para futuras vacantes." />
+
+  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Títulos con look deportivo/moderno (Rajdhani) con performance seguro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+
   <style>
-    html { scroll-behavior: smooth; }
+    /* Base */
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
     .shadow-soft { box-shadow: 0 10px 20px rgba(0,0,0,.4), 0 6px 6px rgba(0,0,0,.5); }
-    .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(8px); }
-    .brand-gradient { background: linear-gradient(90deg, #ffffff 0%, #ff8a00 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    header.sticky.top-0 { -webkit-backdrop-filter: blur(8px); background-color: rgba(17,17,17,0.8); }
+
+    /* Títulos con look deportivo/moderno */
+    h1, h2, h3 {
+      font-family: 'Rajdhani', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      letter-spacing: .02em;
+    }
+
+    /* Texto metalizado animado */
+    .brand-gradient {
+      background: linear-gradient(110deg, #ffffff 0%, #ffe8d6 18%, #ffb36b 28%, #ff8a00 38%, #ffb36b 48%, #ffe8d6 60%, #ffffff 80%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: metallic-sheen 6s linear infinite;
+    }
+    @keyframes metallic-sheen {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .brand-gradient { animation: none; }
+    }
 
     /* Hint visual: zoom + halo */
     .pulse-zoom { animation: nudgeZoom .5s ease; }
@@ -20,23 +52,19 @@
     @keyframes nudgeZoom { 0% { transform: scale(1); } 50% { transform: scale(1.06); } 100% { transform: scale(1); } }
     @keyframes halo { 0% { box-shadow: 0 0 0 0 rgba(255,138,0,0); } 50% { box-shadow: 0 0 0 6px rgba(255,138,0,0.22), 0 0 28px rgba(255,138,0,0.35); } 100% { box-shadow: 0 0 0 0 rgba(255,138,0,0); } }
 
-    /* FAQ: deslizamiento suave (solo altura, sin opacidad para evitar parpadeos) */
+    /* FAQ: slide height sin parpadeos (JS gestiona max-height) */
     details .faq-content { max-height: 0; overflow: hidden; transition: max-height .32s ease; will-change: max-height; }
-    details[open] .faq-content { /* max-height se gestiona por JS para mayor suavidad */ }
+    details[open] .faq-content { /* se gestiona por JS */ }
     summary::-webkit-details-marker { display: none; }
     summary:focus-visible { outline: 2px solid #fb923c; outline-offset: 4px; border-radius: .5rem; }
-      /* iOS Safari friendly tweaks */
-    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-    .glass { -webkit-backdrop-filter: blur(8px); }
-    .sticky.top-0 { -webkit-backdrop-filter: blur(8px); }
-    .brand-gradient { -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* Medios siempre responsivos */
     img, iframe, video { max-width: 100%; height: auto; }
-    header { background-color: rgba(17,17,17,0.8); }
   </style>
 </head>
 <body class="bg-neutral-950 text-slate-100">
   <a href="#postula" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-orange-600 focus:text-white focus:px-3 focus:py-2 focus:rounded">Saltar al formulario</a>
-  
+
   <!-- NAV -->
   <header class="sticky top-0 z-40 bg-neutral-900/80 backdrop-blur border-b border-neutral-800">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -46,6 +74,7 @@
       <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
         <a href="#servicios" class="hover:text-orange-400">Servicios</a>
         <a href="#nosotros" class="hover:text-orange-400">¿Qué somos?</a>
+        <a href="#por-que" class="hover:text-orange-400">¿Por qué elegirnos?</a>
         <a href="#proceso" class="hover:text-orange-400">Proceso</a>
         <a href="#faq" class="hover:text-orange-400">FAQ</a>
       </nav>
@@ -63,6 +92,7 @@
       <div class="max-w-6xl mx-auto px-4 py-3 grid gap-3 text-sm">
         <a class="py-2 hover:text-orange-400" href="#servicios">Servicios</a>
         <a class="py-2 hover:text-orange-400" href="#nosotros">¿Qué somos?</a>
+        <a class="py-2 hover:text-orange-400" href="#por-que">¿Por qué elegirnos?</a>
         <a class="py-2 hover:text-orange-400" href="#proceso">Proceso</a>
         <a class="py-2 hover:text-orange-400" href="#faq">FAQ</a>
         <a class="py-2 inline-flex w-max rounded-xl bg-orange-600 text-white px-4 font-semibold shadow-soft hover:bg-orange-700" href="#postula">Postular</a>
@@ -135,14 +165,48 @@
   <section id="nosotros" class="py-12 md:py-20 border-t border-neutral-800 bg-neutral-950">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-extrabold brand-gradient">¿Qué somos? ¿Qué hacemos?</h2>
-      <p class="mt-3 text-slate-300 max-w-3xl">Somos <strong>ALIANNEX</strong>, una plataforma de <strong>reclutamiento y staffing</strong> especializada en personal operativo y deportivo para gimnasios, colegios y empresas. Reunimos postulantes, realizamos pre-filtros rápidos y mantenemos una base organizada para ofrecer a las instituciones candidatos que realmente encajen con sus necesidades.</p>
+      <p class="mt-3 text-slate-300 max-w-3xl">
+        En <strong>ALIANNEX</strong> prestamos servicios de <strong>soluciones en gestión de personal</strong>,
+        conectando a tu empresa con el talento que realmente necesita. Nos encargamos del reclutamiento y selección de los
+        candidatos adecuados, mientras creamos un canal de comunicación más efectivo entre trabajadores y organización.
+        Así evitamos problemas que afectan la productividad y fortalecemos un entorno laboral fluido, confiable y orientado al crecimiento.
+      </p>
+
       <div class="mt-6 p-6 rounded-xl border border-neutral-800 bg-neutral-900">
         <h3 class="font-semibold text-white">Nuestro servicio en pocas palabras</h3>
         <ul class="mt-3 list-disc list-inside text-slate-400">
           <li><strong>Matching eficiente:</strong> cuando una institución solicita personal, buscamos en nuestra base y presentamos un <em>shortlist</em> de candidatos.</li>
-          <li><strong>Pre‑filtro y verificación:</strong> validamos disponibilidad, referencias básicas y documentación inicial (p. ej. visa para extranjeros).</li>
-          <li><strong>Reemplazos rápidos:</strong> cobertura prioritaria en caso de ausencias o picos de demanda.</li>
+          <li><strong>Reclutamiento y selección:</strong> aplicamos pre-filtros, validamos documentación y realizamos verificaciones básicas.</li>
+          <li><strong>Continuidad asegurada:</strong> cobertura prioritaria ante ausencias o picos de demanda.</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ¿POR QUÉ ELEGIRNOS? -->
+  <section id="por-que" class="py-12 md:py-20 border-t border-neutral-800 bg-neutral-950">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold brand-gradient">¿Por qué elegirnos?</h2>
+      <p class="mt-3 text-slate-300 max-w-3xl">
+        En <strong>ALIANNEX</strong> ofrecemos algo más que rapidez: construimos relaciones de confianza y crecimiento mutuo entre empresas y personas.
+        Nuestro enfoque prioriza el desempeño, la continuidad y el desarrollo, para equipos estables y comprometidos.
+      </p>
+
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft transition-transform duration-200 hover:-translate-y-1">
+          <h3 class="font-semibold text-white">Talento comprometido</h3>
+          <p class="mt-2 text-slate-400 text-sm">Reclutamos personas responsables y puntuales, con foco en desempeño y buena experiencia para el usuario final.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft transition-transform duration-200 hover:-translate-y-1">
+          <h3 class="font-semibold text-white">Continuidad para tu operación</h3>
+          <p class="mt-2 text-slate-400 text-sm">Menor rotación y cobertura oportuna de ausencias o picos de demanda, para que tu servicio no se detenga.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900 shadow-soft transition-transform duration-200 hover:-translate-y-1">
+          <h3 class="font-semibold text-white">Progreso y reconocimiento</h3>
+          <p class="mt-2 text-slate-400 text-sm">Reconocemos el buen trabajo con oportunidades de avanzar y acceder a mejores condiciones con el tiempo.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -229,7 +293,7 @@
         <h3 class="font-extrabold text-xl brand-gradient">Hablemos</h3>
         <p class="mt-2 text-slate-400 text-sm">¿Institución interesada? Escríbenos y coordinamos una llamada breve.</p>
         <div class="mt-3 text-sm">
-          <a id="email-cta" href="mailto:contacto.aliannex@gmail.com" class="inline-block rounded-md text-orange-400 font-semibold underline px-1">contacto.aliannex@gmail.com</a> · 
+          <a id="email-cta" href="mailto:contacto.aliannex@gmail.com" class="inline-block rounded-md text-orange-400 font-semibold underline px-1">contacto.aliannex@gmail.com</a> ·
           <a id="wa-cta" href="https://wa.me/56986985919" target="_blank" rel="noopener" class="inline-block rounded-md text-orange-400 font-semibold underline px-1">WhatsApp</a>
         </div>
       </div>
@@ -250,10 +314,9 @@
       var mobile = document.getElementById('mobile-menu');
       if (toggle && mobile) {
         toggle.addEventListener('click', function(){
-          var open = mobile.classList.toggle('hidden') === false; // si quedó visible
+          var open = mobile.classList.toggle('hidden') === false;
           toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
-        // Cerrar menú al hacer clic en un enlace del menú móvil
         mobile.addEventListener('click', function(e){
           if (e.target.tagName === 'A') {
             mobile.classList.add('hidden');
@@ -263,8 +326,9 @@
       }
     });
   </script>
+
   <script>
-    // Efecto de "hint" (zoom breve) al llegar a secciones clave
+    // Hint visual al llegar a secciones clave
     (function(){
       function hint(ids){
         ids.forEach(function(id){
@@ -290,13 +354,13 @@
           });
         });
       }
-      // Activar para todos los enlaces que mandan a esas secciones
       interceptAnchor('a[href="#postula"]', '#postula', ['form-cta']);
       interceptAnchor('a[href="#contacto"]', '#contacto', ['email-cta','wa-cta']);
     })();
   </script>
+
   <script>
-    // Acordeón FAQ sin parpadeos: animamos solo altura y ponemos 'max-height: none' al finalizar
+    // FAQ sin parpadeos: animamos solo altura y dejamos 'max-height: none' al final
     (function(){
       var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReduced) return;
@@ -307,17 +371,14 @@
         content.style.maxHeight = det.open ? content.scrollHeight + 'px' : '0px';
         det.addEventListener('toggle', function(){
           var open = det.open;
-          // En apertura, fijamos el maxHeight al valor medido
           if (open) {
             content.style.transition = 'none';
             content.style.maxHeight = '0px';
-            // siguiente frame → animar a altura real
             requestAnimationFrame(function(){
               content.style.transition = 'max-height 320ms ease';
               content.style.maxHeight = content.scrollHeight + 'px';
             });
           } else {
-            // En cierre, partimos desde la altura actual y animamos a 0
             content.style.transition = 'none';
             content.style.maxHeight = content.scrollHeight + 'px';
             requestAnimationFrame(function(){
@@ -326,7 +387,6 @@
             });
           }
         });
-        // Limpieza al terminar animación: si está abierto, quitar límite
         content.addEventListener('transitionend', function(){
           if (det.open) {
             content.style.transition = 'none';
